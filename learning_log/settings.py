@@ -155,8 +155,7 @@ if os.getcwd() == '/app':  # 获取当前的工作目录
     # 静态资产配置
     #BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 设置项目，使其能够在heroku上正确提供静态文件
     STATIC_URL = '/static/'
-   # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
-        os.path.join(BASE_DIR, 'learning_log', 'learning_log', 'static'),
     ]
