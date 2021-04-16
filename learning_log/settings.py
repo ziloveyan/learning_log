@@ -143,7 +143,7 @@ BOOTSTRAP3 = {
 if os.getcwd() == '/app':  # 获取当前的工作目录
     import dj_database_url  # 导入dj_database_url，用于在heroku上配置服务器
     DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
+        'default': dj_database_url.config(default='sqlite3://localhost')
     }
 
     # 让request.is_secure()承认X-Forwarded-Proto头
@@ -153,6 +153,10 @@ if os.getcwd() == '/app':  # 获取当前的工作目录
     ALLOWED_HOSTS = ['*']  # 让Django能够使用heroku的url来提供项目提供的服务
 
     # 静态资产配置
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 设置项目，使其能够在heroku上正确提供静态文件
-    STATIC_ROOT = 'staticfiles'
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
+    #BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 设置项目，使其能够在heroku上正确提供静态文件
+    STATIC_URL = '/static/'
+   # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'learning_log', 'learning_log', 'static'),
+    ]
