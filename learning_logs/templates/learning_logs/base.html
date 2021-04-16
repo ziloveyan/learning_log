@@ -1,0 +1,72 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 头部：不包含任何内容，只是将正确显示页面所需的信息告诉浏览器 -->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Learning Log</title>
+
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+
+<!-- 定义顶部导航栏 -->
+    <body>
+      <!--
+        nav 元素，表示页面的导航链接，对于这个元素内的所有内容，都将根据选择器（selector）navbar、
+        navbar-default和navbar-static-top定义的Bootstrap样式规则来设置样式。
+      -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <!--
+                      定义一个按钮，它将在浏览器窗口太窄、无法水平显示整个导航栏时显示出来。
+                      单击这个按钮将出现一下下拉列表，其中包含所有的导航元素。collapse会使导航栏
+                      折叠起来。
+                    -->
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                    </button>
+                    <!-- 设置在导航栏的最左边显示项目名，并将其设置为到主页的链接 -->
+                    <a class="navbar-brand" href="{% url 'learning_logs:index' %}">
+                        Learning Log
+                    </a>
+                </div>
+
+                <!-- 定义一组让用户能在网站中导航的链接，导航栏就是一组以<ul>打头的列表，其中每个链接都是一个列表项 -->
+                <div id="navbar" class="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+                    </ul>
+
+                    <!-- 添加第二个导航链接列表，使用选择器navbar-right，使导航链接出现在导航栏右侧。 -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li><a>Hello, {{ user.username }}.</a></li>
+                            <li><a href="{% url 'users:logout' %}">Log out</a></li>
+                        {% else %}
+                            <li><a href="{% url 'users:register' %}">register</a></li>
+                            <li><a href="{% url 'users:login' %}">Log in</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <div class="page-header">
+                {% block header %}{% endblock header %}
+            </div>
+            <div>
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </body>
+</html>
