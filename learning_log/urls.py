@@ -16,10 +16,14 @@ Including another URL conf
 from django.contrib import admin
 from django.urls import include
 from django.conf.urls import url
+from django.views import static
+from django.conf import settings
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('learning_logs.urls')),
     url(r'^users/', include('users.urls')),
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static'),
 ]

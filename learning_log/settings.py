@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9%_nv$ou7ntgi7+u8rlkfd3amzy6h^-6x_u(z&&yf8%7poiz%y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -153,9 +153,9 @@ if os.getcwd() == '/app':  # 获取当前的工作目录
     ALLOWED_HOSTS = ['*']  # 让Django能够使用heroku的url来提供项目提供的服务
 
     # 静态资产配置
-    #BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 设置项目，使其能够在heroku上正确提供静态文件
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 设置项目，使其能够在heroku上正确提供静态文件
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = 'static'
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, '/static/'),
     ]
